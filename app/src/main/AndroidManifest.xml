@@ -13,6 +13,16 @@
         android:theme="@style/Theme.DemoJetpackCompose"
         tools:targetApi="31">
         <activity
+            android:name=".DemoComponents.DemoComponentPart02"
+            android:exported="false"
+            android:label="@string/title_activity_demo_component_part02"
+            android:theme="@style/Theme.DemoJetpackCompose" />
+        <activity
+            android:name=".DemoComponents.DemoComponentPart01"
+            android:exported="false"
+            android:label="@string/title_activity_demo_component_part01"
+            android:theme="@style/Theme.DemoJetpackCompose" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

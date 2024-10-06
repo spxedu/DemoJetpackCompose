@@ -11,16 +11,17 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+//Định nghĩa tên Theme 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
-
+//Định nghĩa tên Theme 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = mau_so_1,
+    secondary = mau_so_2,
+    tertiary = mau_so_3
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -32,6 +33,8 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
+// Thiết lập code lựa chọn theme theo hệ thống
 
 @Composable
 fun DemoJetpackComposeTheme(
@@ -50,6 +53,7 @@ fun DemoJetpackComposeTheme(
         else -> LightColorScheme
     }
 
+    // thiết lập mẫu màu sắc, kiểu chữ... update vào MaterialTheme 
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
