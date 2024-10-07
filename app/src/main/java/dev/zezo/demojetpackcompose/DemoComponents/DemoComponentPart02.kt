@@ -13,12 +13,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -32,6 +34,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -69,6 +72,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import dev.zezo.demojetpackcompose.ui.theme.DemoJetpackComposeTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -102,6 +106,7 @@ class DemoComponentPart02 : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun Greeting2(name: String, modifier: Modifier = Modifier,
@@ -185,7 +190,8 @@ fun Greeting2(name: String, modifier: Modifier = Modifier,
             Modifier
                 .fillMaxWidth()
                 .background(Color.Blue)
-                .height(200.dp)) {
+                .height(200.dp)
+        ) {
             Box(
                 Modifier
                     .rotate(45f) // xoay lật 45 độ, cái này phải đặt ở trước, đặt cuối nó không xoay
@@ -379,7 +385,7 @@ fun Greeting2(name: String, modifier: Modifier = Modifier,
             }
         )
         //-- switch với thumb tùy chỉnh
-         Switch(checked = checked, onCheckedChange = {
+        Switch(checked = checked, onCheckedChange = {
             checked = it
         }, thumbContent = if (checked) {
             {
@@ -426,37 +432,102 @@ fun Greeting2(name: String, modifier: Modifier = Modifier,
         - Bước 5: Ở trong hàm Greeting khai báo nút bấm để hiển thị snackbar
 
         */
-    
+
         // Nút để kích hoạt Snackbar
         Button(onClick = {
             // Hiển thị Snackbar khi nhấn nút
             scope.launch {
-               var result =  snackbarHostState.showSnackbar(
+                var result = snackbarHostState.showSnackbar(
                     message = "Đây là nội dung hiển thị trên snackbar, xem logcat",
                     actionLabel = "Đây là text hành động, bấm vào",
-                   duration = SnackbarDuration.Short // thiết lập thời gian tự tắt
-               )
+                    duration = SnackbarDuration.Short // thiết lập thời gian tự tắt
+                )
 
                 // Xử lý click vào action
-            when (result) {
-                SnackbarResult.ActionPerformed -> {
-                    // Người dùng đã nhấn vào "Undo"
-                    // Xử lý việc hoàn tác (Undo) ở đây
-                    println("Người dùng đã bấm vào action, xem logcat nhé ")
+                when (result) {
+                    SnackbarResult.ActionPerformed -> {
+                        // Người dùng đã nhấn vào "Undo"
+                        // Xử lý việc hoàn tác (Undo) ở đây
+                        println("Người dùng đã bấm vào action, xem logcat nhé ")
+                    }
+
+                    SnackbarResult.Dismissed -> {
+                        // Snackbar tự động bị tắt hoặc người dùng bỏ qua
+                        println("Snackbar tự tắt, người dùng không bấm, xem logcat")
+                    }
                 }
-                SnackbarResult.Dismissed -> {
-                    // Snackbar tự động bị tắt hoặc người dùng bỏ qua
-                    println("Snackbar tự tắt, người dùng không bấm, xem logcat")
-                }
-            }
 
             }
         }) {
             Text("Show Snackbar")
         }
 
+        //------------ Demo Dialog------
+        //Bước 1: Định nghĩa hàm hiển thị Dialog để dùng nhiều lần DemoDialog
+        //Bước 2: Sử dụng state để lưu trạng thái ẩn hay hiện Dialog
+        //Bước 3: Ở nơi cần hiện Dialog thì thay đổi trạng thái 
 
+        var showDialog by remember { mutableStateOf(false) }
+
+        if (showDialog) {
+            DemoDialog(
+                tieuDe = "Tiêu đề Dialog ",
+                noiDung = "Nội dung thông báo Dialog",
+                suKienBamNutOk = {showDialog = false },
+               
+            )
+        }
+
+        Button(onClick = {
+            showDialog = true
+        }) {
+            Text("Hien thi dialog demo")
+        }
 
 
     }
+}
+
+    @Composable
+    fun DemoDialog (tieuDe: String,
+                    noiDung: String,
+                    suKienBamNutOk: () -> Unit,
+
+    ){
+
+        Dialog(onDismissRequest = {}) {
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White,
+                ),
+                modifier = Modifier.padding(20.dp).fillMaxWidth(),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.Start,
+                ) {
+                    Text(
+                        tieuDe, style =
+                        MaterialTheme.typography.titleLarge
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Text(
+                        noiDung, style =
+                        MaterialTheme.typography.bodyMedium
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Button(
+                        onClick = suKienBamNutOk,
+                        modifier = Modifier.align(Alignment.End), colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.DarkGray,
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text("OK")
+                    }
+                }
+            }
+        }
 }
