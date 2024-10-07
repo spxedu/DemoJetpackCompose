@@ -2,6 +2,7 @@ package dev.zezo.demojetpackcompose.DemoComponents
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -22,12 +23,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -40,12 +44,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -484,7 +491,39 @@ fun Greeting2(name: String, modifier: Modifier = Modifier,
             Text("Hien thi dialog demo")
         }
 
+        //------- Demo FloatingActionButton --------
+        //---- Lưu ý: Sử dụng kêt hợp với Scaffold sẽ phù hợp hơn
+        FloatingActionButton(
+            onClick = {
+                Toast.makeText(_context,"Bấm nút", Toast.LENGTH_SHORT).show()
+            },
+        ) {
+            Icon(Icons.Filled.Add, "Floating action button.")
+        }
 
+
+        SmallFloatingActionButton(
+            onClick = {
+                Toast.makeText(_context,"Bấm nút", Toast.LENGTH_SHORT).show()
+                      },
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.secondary
+        ) {
+            Icon(Icons.Filled.Add, "Small floating action button.")
+        }
+
+        LargeFloatingActionButton(
+            onClick = { Toast.makeText(_context,"Bấm nút", Toast.LENGTH_SHORT).show() },
+            shape = CircleShape,
+        ) {
+            Icon(Icons.Filled.Add, "Large floating action button")
+        }
+
+        ExtendedFloatingActionButton(
+            onClick = { Toast.makeText(_context,"Bấm nút", Toast.LENGTH_SHORT).show() },
+            icon = { Icon(Icons.Filled.Edit, "Extended floating action button.") },
+            text = { Text(text = "Extended FAB") },
+        )
     }
 }
 

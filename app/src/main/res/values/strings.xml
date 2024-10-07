@@ -2,4 +2,6 @@
     <string name="app_name">DemoJetpackCompose</string>
     <string name="title_activity_demo_component_part01">DemoComponentPart01</string>
     <string name="title_activity_demo_component_part02">DemoComponentPart02</string>
+    <string name="title_activity_demo_lazy_column">DemoLazyColumn</string>
+    <string name="title_activity_demo_lazy_grid_lazy_image">DemoLazyGrid_LazyImage</string>
 </resources>

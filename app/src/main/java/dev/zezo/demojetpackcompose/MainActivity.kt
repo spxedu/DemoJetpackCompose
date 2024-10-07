@@ -21,6 +21,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import dev.zezo.demojetpackcompose.DemoComponents.DemoComponentPart01
 import dev.zezo.demojetpackcompose.DemoComponents.DemoComponentPart02
+import dev.zezo.demojetpackcompose.DemoComponents.DemoLazyColumn
+import dev.zezo.demojetpackcompose.DemoComponents.DemoLazyGrid_AsyncImage
 import dev.zezo.demojetpackcompose.ui.theme.DemoJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -59,6 +61,20 @@ fun Home(name: String, modifier: Modifier = Modifier) {
             ct.startActivity( newIntent )
         }) {
             Text(text = "Demo Component part02", color =Color.Blue)
+
+        }
+        Button(onClick = {
+            val newIntent = Intent(ct, DemoLazyColumn::class.java);
+            ct.startActivity( newIntent )
+        }) {
+            Text(text = "Demo LazyColumn", color =Color.Green)
+
+        }
+        Button(onClick = {
+            val newIntent = Intent(ct, DemoLazyGrid_AsyncImage::class.java);
+            ct.startActivity( newIntent )
+        }) {
+            Text(text = "Demo Grid - Image", color =Color.Red)
 
         }
     }
