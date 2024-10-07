@@ -7,3 +7,4 @@ FF đại diện cho giá trị alpha, tức là 255 (hoặc 100% opacity), có 
 8c là giá trị của màu xanh lá (green), tương đương với 140 trong hệ thập phân.
 04 là giá trị của màu xanh dương (blue), tương đương với 4 trong hệ thập phân.
 
+https://github.com/spxedu/DemoJetpackCompose/blob/main/app/src/main/java/dev/zezo/demojetpackcompose/ui/theme/Color.kt#L14-L17
